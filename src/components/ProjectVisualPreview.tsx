@@ -24,6 +24,127 @@ export function ProjectVisualPreview({
   const [relayStarter, setRelayStarter] = useState(false);
   const [voiceActive, setVoiceActive] = useState(true);
   const [generation, setGeneration] = useState(42);
+  const [liters, setLiters] = useState(4.25);
+
+  if (preset === "mediapipe-onnx") {
+    return (
+      <div
+        className={`relative flex h-full w-full flex-col justify-between overflow-hidden p-4 font-mono-tech text-[11px] ${className}`}
+        style={{
+          background:
+            "radial-gradient(circle at 20% 20%, rgba(236,72,153,0.18), transparent 58%), rgba(10, 10, 18, 0.94)",
+          color: "#FCE7F3",
+        }}
+      >
+        <div className="flex items-center justify-between text-[10px]">
+          <span className="flex items-center gap-1.5 text-pink-300">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-pink-400" />
+            KEINARRA // MEDIAPIPE + ONNX
+          </span>
+          <span className="rounded border border-pink-400/30 bg-pink-500/15 px-1.5 py-0.5 text-[9px]">
+            WASM + WEBGL
+          </span>
+        </div>
+
+        <div className="relative my-2 flex-1 rounded border border-pink-400/20 bg-black/45 p-2">
+          <svg viewBox="0 0 260 110" className="h-full w-full">
+            {/* Hand/Pose keypoint wireframe */}
+            <circle cx="80" cy="54" r="24" fill="none" stroke="rgba(236,72,153,0.45)" strokeWidth="1" strokeDasharray="3 2" />
+            <line x1="80" y1="30" x2="80" y2="78" stroke="rgba(236,72,153,0.35)" strokeWidth="1" />
+            <line x1="56" y1="54" x2="104" y2="54" stroke="rgba(236,72,153,0.35)" strokeWidth="1" />
+            {[
+              [80, 38],
+              [68, 50],
+              [92, 50],
+              [72, 66],
+              [88, 66],
+              [172, 36],
+              [194, 48],
+              [184, 72],
+            ].map(([cx, cy], idx) => (
+              <circle
+                key={idx}
+                cx={cx}
+                cy={cy}
+                r="2.8"
+                fill={idx < 5 ? "#F472B6" : "#38BDF8"}
+              />
+            ))}
+            <path
+              d="M 172 36 L 194 48 L 184 72 Z"
+              fill="rgba(56,189,248,0.12)"
+              stroke="#38BDF8"
+              strokeWidth="1.2"
+            />
+            <text x="148" y="22" fill="#7DD3FC" fontSize="8" fontFamily="monospace">
+              KNN CLASS: GESTURE_OK
+            </text>
+            <text x="148" y="96" fill="#F9A8D4" fontSize="8" fontFamily="monospace">
+              MQTT: hivemq/teleop
+            </text>
+          </svg>
+        </div>
+
+        <div className="flex items-center justify-between text-[10px] text-pink-200/75">
+          <span>TF.js COCO-SSD · Groq Overlay</span>
+          <span>Live on Vercel</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (preset === "motoring-mobile") {
+    return (
+      <div
+        className={`relative flex h-full w-full flex-col justify-between overflow-hidden p-4 font-mono-tech text-[11px] ${className}`}
+        style={{
+          background:
+            "radial-gradient(circle at 75% 20%, rgba(245,158,11,0.18), transparent 58%), rgba(12, 11, 9, 0.94)",
+          color: "#FEF3C7",
+        }}
+      >
+        <div className="flex items-center justify-between text-[10px]">
+          <span className="text-amber-300">MOTORINGV // MOBILE SAFE-AREA</span>
+          <span className="rounded border border-amber-400/30 bg-amber-500/15 px-1.5 py-0.5 text-[9px]">
+            PRIVATE REPO
+          </span>
+        </div>
+
+        <div className="my-auto grid grid-cols-2 gap-2 py-2 text-[10px]">
+          <div className="rounded border border-white/10 bg-white/[0.04] p-2.5">
+            <div className="text-[9px] text-white/50">FUEL FILL LOG</div>
+            <div className="mt-1 text-base font-bold text-amber-300">
+              {liters.toFixed(2)} L
+            </div>
+            <div className="text-[9px] text-emerald-400">~46.8 km/L AVG</div>
+          </div>
+          <div className="rounded border border-white/10 bg-white/[0.04] p-2.5">
+            <div className="text-[9px] text-white/50">NEXT SERVICE</div>
+            <div className="mt-1 text-base font-bold text-white">18,450 km</div>
+            <div className="text-[9px] text-amber-200/70">16px Anti-Zoom UI</div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-white/10 pt-2 text-[10px] text-white/60">
+          <span>Next.js Turbopack · Groq Care</span>
+          {interactive ? (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLiters((l) => (l >= 6 ? 3.5 : Number((l + 0.75).toFixed(2))));
+              }}
+              className="rounded border border-amber-400/40 bg-amber-500/15 px-2 py-0.5 text-[9px] text-amber-200 hover:bg-amber-500/30"
+            >
+              +0.75 L TEST
+            </button>
+          ) : (
+            <span>Vercel Live</span>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   if (preset === "neural-driving") {
     return (

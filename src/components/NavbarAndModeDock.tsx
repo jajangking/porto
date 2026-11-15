@@ -98,7 +98,7 @@ export function NavbarAndModeDock() {
                 href="#archive"
                 className="transition-colors hover:text-[var(--text-primary)]"
               >
-                {locale === "id" ? "Vault GitHub" : "GitHub Vault"}
+                {locale === "id" ? "Vercel & GitHub" : "Vercel & GitHub"}
               </a>
               <a
                 href="#contact"

@@ -871,6 +871,177 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
     repoUrl: "https://github.com/jajangking/Inventory",
     liveUrl: "https://inventory-blue-chi.vercel.app",
+    relatedDeploys: [
+      { name: "Toolkit Suite", url: "https://toolkit-tau-topaz.vercel.app" },
+      { name: "Fixit Journal", url: "https://fixit-henna-ten.vercel.app" },
+      { name: "Personal Story", url: "https://personal-story-rho.vercel.app" },
+      { name: "Parker POS", url: "https://parker-topaz.vercel.app" },
+      { name: "Newbie Workspace", url: "https://newbie-five-tau.vercel.app" },
+      { name: "Silsilah V2", url: "https://silsilah-v2.vercel.app" },
+      { name: "Silsilah V1", url: "https://silsilah-xi.vercel.app" },
+      { name: "Uniquestuff Blog", url: "https://uniquestuff.vercel.app" },
+    ],
+  },
+  {
+    slug: "keinarra-vision",
+    repoName: "keinarra",
+    title: "Keinarra & Kei — Browser Vision ONNX, MediaPipe & MQTT",
+    year: "2026",
+    featured: true,
+    category: "ai-vision",
+    tagline: {
+      id: "Laboratorium computer vision & AI overlay di browser berbasis MediaPipe, ONNX Runtime Web, TF.js, & HiveMQ MQTT.",
+      en: "In-browser computer vision & AI workbench fusing MediaPipe Tasks, ONNX Runtime Web, TF.js COCO-SSD, Groq & HiveMQ MQTT.",
+    },
+    summary: {
+      id: "Ekosistem aplikasi Next.js 16 di Vercel (keinarra.vercel.app, kei-ten.vercel.app, gims-delta.vercel.app) yang mengeksekusi inferensi computer vision langsung di GPU/WASM browser (MediaPipe Vision, ONNX Runtime Web, RTMLib pose/face, COCO-SSD, & KNN classifier), lengkap dengan overlay chat Groq AI, Leaflet GPS map, dan MQTT telemetry.",
+      en: "A live Vercel-deployed Next.js 16 trio (keinarra, kei, gims) running in-browser computer vision pipelines (MediaPipe Vision, ONNX Runtime Web, RTMLib, TF.js COCO-SSD & KNN classifier) paired with Groq AI chat overlays, Leaflet mapping, Edge TTS, and HiveMQ Cloud MQTT telemetry.",
+    },
+    challenge: {
+      id: "Menjalankan berbagai model computer vision modern (MediaPipe + ONNX + TensorFlow.js WebGL) secara bersamaan di dalam Next.js 16 tanpa konflik file WASM maupun lag UI.",
+      en: "Orchestrating heterogeneous client-side vision runtimes (MediaPipe WASM, ONNX Runtime Web, and TF.js WebGL) inside Next.js 16 builds without WASM asset drift or frame drops.",
+    },
+    architectureSummary: {
+      id: "Build pipeline kustom menyalin aset WASM & mengunduh model secara deterministik sebelum `next build`, menghubungkan kamera real-time ke klasifier KNN/ONNX, AI chat overlay, dan broker HiveMQ MQTT.",
+      en: "Custom build-time model & WASM provisioning scripts pair deterministic browser inference with KNN few-shot classification, Groq Vision chat overlays, and HiveMQ MQTT streaming.",
+    },
+    highlights: {
+      id: [
+        "Multi-runtime in-browser: MediaPipe Tasks Vision + ONNX Runtime Web + TF.js + RTMLib",
+        "Custom KNN classifier interaktif + Groq AI chat overlay & kontrol sensitivitas kamera (Gims)",
+        "Integrasi peta Leaflet, Edge TTS, dan jembatan HiveMQ MQTT ke mikrokontroler ESP32 (Kei)",
+      ],
+      en: [
+        "Triple vision runtime in browser: MediaPipe Tasks Vision, ONNX Runtime Web & TF.js COCO-SSD",
+        "Interactive KNN classifier, Groq AI chat overlay & real-time sensitivity tuning (Gims)",
+        "Leaflet geospatial view, Edge TTS & HiveMQ Cloud MQTT bridge to ESP32 hardware (Kei)",
+      ],
+    },
+    stack: [
+      "Next.js 16",
+      "MediaPipe Vision",
+      "ONNX Runtime Web",
+      "TensorFlow.js",
+      "Groq SDK",
+      "HiveMQ MQTT",
+    ],
+    primaryLang: "TypeScript",
+    accentHex: "#EC4899",
+    simulationPreset: "mediapipe-onnx",
+    metrics: [
+      { label: { id: "Vision Stack", en: "Runtimes" }, value: "ONNX + MP + TF" },
+      { label: { id: "Live Deploys", en: "Vercel Apps" }, value: "3 Production" },
+      { label: { id: "Protokol IoT", en: "Telemetry" }, value: "HiveMQ MQTT" },
+    ],
+    architectureNodes: [
+      {
+        layer: "01 // WASM VISION",
+        title: "MediaPipe & ONNX Engine",
+        detail: {
+          id: "Inferensi landmark, pose, & deteksi objek COCO-SSD langsung di WebGL/WASM.",
+          en: "Executes landmark, pose, and COCO-SSD detection directly via WebGL/WASM.",
+        },
+      },
+      {
+        layer: "02 // CLASSIFY",
+        title: "KNN & Groq Overlay",
+        detail: {
+          id: "Pelatihan kelas instan di browser dipadukan overlay diskusi AI kontekstual.",
+          en: "Zero-backend KNN classification paired with context-aware Groq AI chat.",
+        },
+      },
+      {
+        layer: "03 // BRIDGE",
+        title: "Leaflet + Edge TTS + MQTT",
+        detail: {
+          id: "Menghubungkan hasil deteksi ke peta interaktif, suara, & perintah ESP32.",
+          en: "Dispatches vision states to Leaflet maps, Edge TTS feedback, & ESP32 topics.",
+        },
+      },
+    ],
+    repoUrl: "https://github.com/jajangking/keinarra",
+    liveUrl: "https://keinarra.vercel.app",
+    relatedDeploys: [
+      { name: "Kei Vision & Map", url: "https://kei-ten.vercel.app" },
+      { name: "Gims Camera AI", url: "https://gims-delta.vercel.app" },
+    ],
+  },
+  {
+    slug: "motoringv",
+    repoName: "motoringv",
+    title: "MotoringV — Smart Vehicle & Fuel Telemetry App",
+    year: "2026",
+    featured: false,
+    category: "fullstack-web",
+    isPrivateRepo: true,
+    tagline: {
+      id: "Aplikasi private mobile-first Next.js + Turbopack untuk pelacakan BBM, odometer, & riwayat servis kendaraan harian.",
+      en: "Private mobile-first Next.js + Turbopack telemetry app for fuel consumption, odometer tracking, & motorcycle care.",
+    },
+    summary: {
+      id: "Proyek repositori privat (jajangking/motoring) yang aktif di-deploy di Vercel sebagai motoringv.vercel.app (generasi terbaru mobile UX) dan motoring-one.vercel.app (varian Groq AI). Didesain dengan ergonomi sentuh mobile iOS/Android: safe-area insets, input 16px anti-zoom, presisi desimal liter BBM, & sinkronisasi instan.",
+      en: "Private repository project (jajangking/motoring) shipped on Vercel across motoringv.vercel.app (Next.js Turbopack mobile-UX build) and motoring-one.vercel.app (Groq AI variant). Engineered for thumb-first phone ergonomics: safe-area insets, 16px anti-zoom inputs, decimal fuel accuracy, and one-tap cloud sync.",
+    },
+    challenge: {
+      id: "Mencatat odometer & pengisian BBM saat di SPBU membutuhkan antarmuka HP satu tangan yang bebas lag, presisi angka desimal, dan tidak terpotong notch/safe-area browser mobile.",
+      en: "Logging fuel stops and mileage at the pump demands a zero-friction thumb-friendly phone UI with clean decimal input and zero mobile viewport clipping.",
+    },
+    architectureSummary: {
+      id: "Next.js + Turbopack deployment di Vercel iad1 dengan Fluid Compute, theme-color dinamis, input mobile 16px, serta varian integrasi Groq AI untuk diagnosa servis rutin.",
+      en: "Next.js + Turbopack build running on Vercel Fluid Compute with mobile safe-area ergonomics, dynamic theme chrome, and Groq AI maintenance assistance.",
+    },
+    highlights: {
+      id: [
+        "Ergonomi mobile murni: safe-area viewport, tombol touch target besar, & input 16px tanpa auto-zoom",
+        "Presisi kalkulasi liter BBM & efisiensi km/L real-time beserta tombol sinkronisasi cepat",
+        "Tersedia dalam dua deployment live Vercel: MotoringV (Mobile UX) & Motoring One (Groq AI)",
+      ],
+      en: [
+        "True mobile ergonomics: safe-area insets, oversized tap targets, and 16px anti-zoom inputs",
+        "Precision decimal fuel liters & odometer calculation with one-tap sync controls",
+        "Dual live Vercel deployments: MotoringV (Mobile UX) & Motoring One (Groq AI)",
+      ],
+    },
+    stack: ["Next.js", "Turbopack", "Groq AI", "Mobile Safe-Area", "Private GitHub", "Vercel"],
+    primaryLang: "TypeScript",
+    accentHex: "#F59E0B",
+    simulationPreset: "motoring-mobile",
+    metrics: [
+      { label: { id: "Repositori", en: "Visibility" }, value: "Private Repo" },
+      { label: { id: "Build Engine", en: "Bundler" }, value: "Turbopack" },
+      { label: { id: "Live Vercel", en: "Deployments" }, value: "2 Active" },
+    ],
+    architectureNodes: [
+      {
+        layer: "01 // MOBILE UX",
+        title: "Safe-Area & Touch Ergonomics",
+        detail: {
+          id: "Layout adaptif notch/gesture bar, font input 16px, & kontrol satu tangan.",
+          en: "Notch/gesture safe-area chrome, 16px inputs, and one-handed controls.",
+        },
+      },
+      {
+        layer: "02 // TELEMETRY",
+        title: "Fuel Liters & Odometer Log",
+        detail: {
+          id: "Validasi angka desimal presisi untuk konsumsi bahan bakar & interval servis.",
+          en: "Decimal-accurate logging for fuel fill-ups and scheduled maintenance.",
+        },
+      },
+      {
+        layer: "03 // AI + SYNC",
+        title: "Vercel Edge & Groq Care",
+        detail: {
+          id: "Sinkronisasi cloud instan + asisten perawatan motor bertenaga Groq AI.",
+          en: "Instant cloud sync paired with Groq AI vehicle care diagnostics.",
+        },
+      },
+    ],
+    liveUrl: "https://motoringv.vercel.app",
+    relatedDeploys: [
+      { name: "MotoringV (Latest Mobile UX)", url: "https://motoringv.vercel.app" },
+      { name: "Motoring One (Groq AI)", url: "https://motoring-one.vercel.app" },
+    ],
   },
 ];
 

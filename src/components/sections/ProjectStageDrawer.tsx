@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   ExternalLink,
+  Lock,
   Maximize2,
   X,
 } from "lucide-react";
@@ -117,22 +118,38 @@ export function ProjectStageDrawer() {
 
                 {/* Action Links */}
                 <div className="mt-5 flex flex-wrap gap-2.5">
-                  <a
-                    href={activeProject.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold transition hover:opacity-90"
-                    style={{
-                      borderRadius: "var(--radius-pill)",
-                      backgroundColor: "var(--accent)",
-                      color: "var(--accent-contrast)",
-                    }}
-                  >
-                    <GitHubMark className="h-4 w-4" />
-                    <span>
-                      {locale === "id" ? "Lihat Source Code" : "View GitHub Repo"}
+                  {activeProject.repoUrl ? (
+                    <a
+                      href={activeProject.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold transition hover:opacity-90"
+                      style={{
+                        borderRadius: "var(--radius-pill)",
+                        backgroundColor: "var(--accent)",
+                        color: "var(--accent-contrast)",
+                      }}
+                    >
+                      <GitHubMark className="h-4 w-4" />
+                      <span>
+                        {locale === "id"
+                          ? "Lihat Source Code"
+                          : "View GitHub Repo"}
+                      </span>
+                    </a>
+                  ) : activeProject.isPrivateRepo ? (
+                    <span
+                      className="inline-flex items-center gap-2 border border-amber-400/30 bg-amber-500/10 px-4 py-2 font-mono-tech text-xs font-semibold text-amber-300"
+                      style={{ borderRadius: "var(--radius-pill)" }}
+                    >
+                      <Lock className="h-3.5 w-3.5" />
+                      <span>
+                        {locale === "id"
+                          ? "Repositori Privat"
+                          : "Private GitHub Repo"}
+                      </span>
                     </span>
-                  </a>
+                  ) : null}
                   {activeProject.liveUrl && (
                     <a
                       href={activeProject.liveUrl}
@@ -151,6 +168,36 @@ export function ProjectStageDrawer() {
                     </a>
                   )}
                 </div>
+
+                {activeProject.relatedDeploys &&
+                  activeProject.relatedDeploys.length > 0 && (
+                    <div className="mt-4">
+                      <div className="mb-1.5 font-mono-tech text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
+                        {locale === "id"
+                          ? "Deployment Terkait di Vercel"
+                          : "Related Live Vercel Deployments"}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeProject.relatedDeploys.map((deploy) => (
+                          <a
+                            key={deploy.url}
+                            href={deploy.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 border px-2.5 py-1 font-mono-tech text-[10px] transition hover:border-emerald-400/60 hover:text-emerald-300"
+                            style={{
+                              borderRadius: "var(--radius-pill)",
+                              borderColor: "var(--border-subtle)",
+                              backgroundColor: "var(--bg-elevated)",
+                            }}
+                          >
+                            <ExternalLink className="h-2.5 w-2.5 text-emerald-400" />
+                            <span>{deploy.name}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
               </div>
 
               {/* Interactive Simulation Preview */}

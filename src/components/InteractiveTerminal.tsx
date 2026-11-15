@@ -6,6 +6,7 @@ import { Terminal, X } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { PROFILE_CONFIG } from "@/data/profile";
 import { PROJECTS } from "@/data/projects";
+import { VERCEL_PROJECTS } from "@/data/vercel-projects";
 
 interface TerminalLine {
   id: number;
@@ -86,11 +87,24 @@ export function InteractiveTerminal() {
         { type: "accent", text: "Available Commands:" },
         { type: "output", text: "  whoami                — Profile & engineering manifesto" },
         { type: "output", text: "  ls [category]         — List flagship projects & slugs" },
+        { type: "output", text: "  vercel                — List all 16 live Vercel deployments" },
         { type: "output", text: "  open <slug>           — Launch seamless case study modal" },
         { type: "output", text: "  mode <obsidian|editorial|hud> — Switch Reality Engine" },
         { type: "output", text: "  stack                 — Core technical runtime stack" },
         { type: "output", text: "  clear                 — Clear terminal buffer" }
       );
+    } else if (base === "vercel") {
+      out.push({
+        type: "accent",
+        text: `Live Vercel Deployments (${VERCEL_PROJECTS.length} active on iad1):`,
+      });
+      VERCEL_PROJECTS.forEach((v) => {
+        const tag = v.visibility === "private" ? " [PRIVATE]" : "";
+        out.push({
+          type: "output",
+          text: `  • ${v.name.padEnd(18, " ")} ${v.liveUrl}${tag}`,
+        });
+      });
     } else if (base === "whoami") {
       out.push(
         {
@@ -217,7 +231,7 @@ export function InteractiveTerminal() {
 
             {/* Quick Hint Chips */}
             <div className="flex flex-wrap gap-1.5 border-t border-white/10 bg-white/[0.02] px-4 py-2">
-              {["help", "ls", "open mterm", "mode editorial", "mode hud", "mode obsidian"].map(
+              {["help", "ls", "vercel", "open mterm", "open motoringv", "mode hud", "mode obsidian"].map(
                 (sample) => (
                   <button
                     key={sample}

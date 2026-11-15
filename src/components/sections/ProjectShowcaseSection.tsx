@@ -7,6 +7,7 @@ import {
   ExternalLink,
   LayoutGrid,
   List,
+  Lock,
   Search,
   Sparkles,
 } from "lucide-react";
@@ -421,17 +422,27 @@ function BentoProjectCard({
                   <span>Live</span>
                 </a>
               )}
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 rounded px-2 py-1 font-mono-tech text-[10px] transition hover:bg-[var(--bg-pill)]"
-                title="GitHub Repository"
-              >
-                <GitHubMark className="h-3 w-3" />
-                <span>Repo</span>
-              </a>
+              {project.repoUrl ? (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1 rounded px-2 py-1 font-mono-tech text-[10px] transition hover:bg-[var(--bg-pill)]"
+                  title="GitHub Repository"
+                >
+                  <GitHubMark className="h-3 w-3" />
+                  <span>Repo</span>
+                </a>
+              ) : project.isPrivateRepo ? (
+                <span
+                  className="inline-flex items-center gap-1 rounded px-2 py-1 font-mono-tech text-[10px] text-amber-300"
+                  title="Private GitHub Repository"
+                >
+                  <Lock className="h-3 w-3" />
+                  <span>Private</span>
+                </span>
+              ) : null}
             </div>
           </div>
         </div>

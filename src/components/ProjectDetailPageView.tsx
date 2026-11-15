@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
   ExternalLink,
+  Lock,
 } from "lucide-react";
 import { GitHubMark } from "@/components/icons/GitHubMark";
 import { ProjectCaseStudy } from "@/types/portfolio";
@@ -63,22 +64,34 @@ export function ProjectDetailPageView({
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold transition hover:opacity-90"
-            style={{
-              borderRadius: "var(--radius-pill)",
-              backgroundColor: "var(--accent)",
-              color: "var(--accent-contrast)",
-            }}
-          >
-            <GitHubMark className="h-4 w-4" />
-            <span>
-              {locale === "id" ? "Buka Repositori GitHub" : "Open GitHub Repo"}
+          {project.repoUrl ? (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold transition hover:opacity-90"
+              style={{
+                borderRadius: "var(--radius-pill)",
+                backgroundColor: "var(--accent)",
+                color: "var(--accent-contrast)",
+              }}
+            >
+              <GitHubMark className="h-4 w-4" />
+              <span>
+                {locale === "id" ? "Buka Repositori GitHub" : "Open GitHub Repo"}
+              </span>
+            </a>
+          ) : project.isPrivateRepo ? (
+            <span
+              className="inline-flex items-center gap-2 border border-amber-400/30 bg-amber-500/10 px-5 py-2.5 font-mono-tech text-xs font-semibold text-amber-300"
+              style={{ borderRadius: "var(--radius-pill)" }}
+            >
+              <Lock className="h-3.5 w-3.5" />
+              <span>
+                {locale === "id" ? "Repositori Privat" : "Private GitHub Repo"}
+              </span>
             </span>
-          </a>
+          ) : null}
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -98,6 +111,35 @@ export function ProjectDetailPageView({
             </a>
           )}
         </div>
+
+        {project.relatedDeploys && project.relatedDeploys.length > 0 && (
+          <div className="mt-5">
+            <div className="mb-2 font-mono-tech text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
+              {locale === "id"
+                ? "Deployment Terkait di Vercel"
+                : "Related Live Vercel Deployments"}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {project.relatedDeploys.map((deploy) => (
+                <a
+                  key={deploy.url}
+                  href={deploy.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 border px-3 py-1 font-mono-tech text-xs transition hover:border-emerald-400/60 hover:text-emerald-300"
+                  style={{
+                    borderRadius: "var(--radius-pill)",
+                    borderColor: "var(--border-subtle)",
+                    backgroundColor: "var(--bg-elevated)",
+                  }}
+                >
+                  <ExternalLink className="h-3 w-3 text-emerald-400" />
+                  <span>{deploy.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Interactive Preview Stage */}

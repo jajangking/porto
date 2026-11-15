@@ -17,6 +17,8 @@ export type SimulationPreset =
   | "robot-vision"
   | "pensil-motion"
   | "multimodal-ai"
+  | "mediapipe-onnx"
+  | "motoring-mobile"
   | "voice-tts"
   | "edge-vlm"
   | "esp32-keyless"
@@ -61,8 +63,13 @@ export interface ProjectCaseStudy {
   simulationPreset: SimulationPreset;
   metrics: ProjectMetric[];
   architectureNodes: ArchitectureNode[];
-  repoUrl: string;
+  repoUrl?: string;
   liveUrl?: string;
+  relatedDeploys?: Array<{
+    name: string;
+    url: string;
+  }>;
+  isPrivateRepo?: boolean;
 }
 
 export interface GitHubRepoItem {
@@ -73,6 +80,24 @@ export interface GitHubRepoItem {
   homepage: string | null;
   updatedAt: string;
   url: string;
+  featuredSlug?: string;
+}
+
+export interface VercelDeploymentItem {
+  id: string;
+  name: string;
+  liveUrl: string;
+  framework: string;
+  nodeVersion: string;
+  region: string;
+  readyState: "READY" | "PROMOTED_WITH_LATEST_ERROR";
+  visibility: "public" | "private";
+  githubRepo: string;
+  repoUrl?: string;
+  summary: BilingualText;
+  latestCommitMessage: string;
+  updatedAt: string;
+  stack: string[];
   featuredSlug?: string;
 }
 

@@ -34,16 +34,16 @@ export const PROFILE_CONFIG: ProfileConfig = {
       label: { id: "Repositori Publik GitHub", en: "Public GitHub Repositories" },
     },
     {
-      value: "12",
+      value: "16",
+      label: { id: "Live Deploy di Vercel", en: "Live Vercel Deployments" },
+    },
+    {
+      value: "14",
       label: { id: "Flagship Multi-Disiplin", en: "Multi-Discipline Flagships" },
     },
     {
       value: "6",
       label: { id: "Runtime: Web · Rust · ARM64", en: "Runtimes: Web · Rust · ARM64" },
-    },
-    {
-      value: "10+",
-      label: { id: "Live Production Deploy", en: "Live Production Deploys" },
     },
   ],
   pillars: [
@@ -80,8 +80,8 @@ export const PROFILE_CONFIG: ProfileConfig = {
         id: "Menjalankan model Vision-Language lokal (LFM2.5-VL & Gemma 4 E2B) langsung di HP Android ARM64 untuk kontrol robot ESP32-S3-CAM, plus web multimodal AI & TTS Indonesia.",
         en: "Running local Vision-Language Models (LFM2.5-VL & Gemma 4 E2B) directly on Android ARM64 to guide ESP32-S3-CAM robots, alongside multimodal web AI and Indonesian TTS.",
       },
-      tools: ["llama.cpp ARM64", "LFM2.5-VL / Gemma 4", "TensorFlow.js", "Groq SDK", "Gemini TTS"],
-      linkedProjects: ["robot-vision-ai", "gemma4-vision", "asisten", "tts-api-indonesia"],
+      tools: ["llama.cpp ARM64", "LFM2.5-VL / Gemma 4", "MediaPipe / ONNX", "Groq SDK", "Gemini TTS"],
+      linkedProjects: ["robot-vision-ai", "keinarra-vision", "gemma4-vision", "asisten", "tts-api-indonesia"],
     },
     {
       id: "systems-rust",
@@ -116,8 +116,8 @@ export const PROFILE_CONFIG: ProfileConfig = {
         id: "Menjembatani produk web modern (Next.js, Firebase, SQLite) dengan hardware fisik ESP32 melalui WiFi & Bluetooth Low Energy untuk otomasi kendaraan dan manajemen bisnis.",
         en: "Bridging modern web & mobile apps (Next.js, Firebase, Expo SQLite) with physical ESP32 hardware over WiFi & BLE for smart vehicle access and business workflows.",
       },
-      tools: ["Next.js App Router", "React Native Expo", "ESP32 C++", "BLE / MQTT", "Firebase / SQLite"],
-      linkedProjects: ["keyless-v2", "posman", "inventory"],
+      tools: ["Next.js App Router", "React Native Expo", "ESP32 C++", "BLE / MQTT", "Firebase / Supabase"],
+      linkedProjects: ["keyless-v2", "posman", "inventory", "motoringv"],
     },
   ],
 };

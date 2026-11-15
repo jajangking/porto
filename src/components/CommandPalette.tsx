@@ -5,15 +5,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUpRight,
   Cpu,
+  ExternalLink,
   Globe,
   Search,
   Sparkles,
   Terminal,
   BookOpen,
+  Triangle,
   X,
 } from "lucide-react";
 import { usePortfolio, VISUAL_MODE_META } from "@/context/PortfolioContext";
 import { PROJECTS } from "@/data/projects";
+import { VERCEL_PROJECTS } from "@/data/vercel-projects";
 import { VisualMode } from "@/types/portfolio";
 
 export function CommandPalette() {
@@ -49,6 +52,18 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         p.repoName.toLowerCase().includes(q) ||
         p.stack.some((s) => s.toLowerCase().includes(q)) ||
         p.tagline[locale].toLowerCase().includes(q)
+    );
+  }, [locale, query]);
+
+  const filteredVercel = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return VERCEL_PROJECTS.slice(0, 6);
+    return VERCEL_PROJECTS.filter(
+      (v) =>
+        v.name.toLowerCase().includes(q) ||
+        v.liveUrl.toLowerCase().includes(q) ||
+        v.stack.some((s) => s.toLowerCase().includes(q)) ||
+        v.summary[locale].toLowerCase().includes(q)
     );
   }, [locale, query]);
 
@@ -234,7 +249,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                   <ArrowUpRight className="h-4 w-4 shrink-0 text-[var(--text-muted)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--accent)]" />
                 </button>
               ))}
-              {filteredProjects.length === 0 && (
+              {filteredProjects.length === 0 && filteredVercel.length === 0 && (
                 <div className="px-3 py-6 text-center text-xs text-[var(--text-muted)]">
                   {locale === "id"
                     ? "Tidak ada proyek yang cocok dengan kata kunci tersebut."
@@ -243,6 +258,42 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
               )}
             </div>
           </div>
+
+          {/* Matching Live Vercel Deploys */}
+          {filteredVercel.length > 0 && (
+            <div>
+              <div className="px-2 pb-1.5 font-mono-tech text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
+                {locale === "id"
+                  ? `Vercel Live Apps (${filteredVercel.length})`
+                  : `Live Vercel Deployments (${filteredVercel.length})`}
+              </div>
+              <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
+                {filteredVercel.map((v) => (
+                  <a
+                    key={v.id}
+                    href={v.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={onClose}
+                    className="group flex items-center justify-between rounded-lg px-3 py-2 text-left transition hover:bg-[var(--bg-pill)]"
+                  >
+                    <div className="min-w-0 pr-2">
+                      <div className="flex items-center gap-2">
+                        <Triangle className="h-3 w-3 shrink-0 fill-current text-[var(--accent)]" />
+                        <span className="truncate text-xs font-semibold">
+                          {v.name}
+                        </span>
+                      </div>
+                      <p className="mt-0.5 truncate font-mono-tech text-[10px] text-emerald-400">
+                        {v.liveUrl.replace("https://", "")}
+                      </p>
+                    </div>
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[var(--text-muted)] group-hover:text-emerald-400" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
