@@ -9,6 +9,7 @@ import {
   Command,
   Cpu,
   BookOpen,
+  Monitor,
   Sparkles,
   SunMedium,
   Terminal,
@@ -51,6 +52,7 @@ export function HeroSection() {
     { id: "editorial", icon: BookOpen },
     { id: "hud", icon: Cpu },
     { id: "clarity", icon: SunMedium },
+    { id: "windows", icon: Monitor },
   ];
 
   const quickProjects = pinnedSlugs
@@ -221,8 +223,8 @@ export function HeroSection() {
                     style={{ color: "var(--accent)" }}
                   >
                     {locale === "id"
-                      ? "QUAD-REALITY ENGINE // LIVE SWITCH"
-                      : "QUAD-REALITY ENGINE // LIVE SWITCH"}
+                      ? "VISUAL REALITY ENGINE // LIVE SWITCH"
+                      : "VISUAL REALITY ENGINE // LIVE SWITCH"}
                   </div>
                   <div className="mt-0.5 text-sm font-semibold">
                     {locale === "id"

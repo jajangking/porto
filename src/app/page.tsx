@@ -1,17 +1,5 @@
-import { HeroSection } from "@/components/sections/HeroSection";
-import { ProjectShowcaseSection } from "@/components/sections/ProjectShowcaseSection";
-import { EngineeringMatrixSection } from "@/components/sections/EngineeringMatrixSection";
-import { GitHubArchiveSection } from "@/components/sections/GitHubArchiveSection";
-import { ContactFooterSection } from "@/components/sections/ContactFooterSection";
+import { HomeExperience } from "@/components/HomeExperience";
 
 export default function HomePage() {
-  return (
-    <>
-      <HeroSection />
-      <ProjectShowcaseSection />
-      <EngineeringMatrixSection />
-      <GitHubArchiveSection />
-      <ContactFooterSection />
-    </>
-  );
+  return <HomeExperience />;
 }

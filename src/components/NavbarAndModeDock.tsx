@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Command,
@@ -10,6 +11,7 @@ import {
   BookOpen,
   Cpu,
   Globe,
+  Monitor,
   SunMedium,
 } from "lucide-react";
 import { usePortfolio, VISUAL_MODE_META } from "@/context/PortfolioContext";
@@ -24,9 +26,11 @@ const MODE_BUTTONS: Array<{
   { id: "editorial", icon: BookOpen },
   { id: "hud", icon: Cpu },
   { id: "clarity", icon: SunMedium },
+  { id: "windows", icon: Monitor },
 ];
 
 export function NavbarAndModeDock() {
+  const pathname = usePathname();
   const {
     mode,
     setMode,
@@ -38,6 +42,11 @@ export function NavbarAndModeDock() {
     webglActive,
     modeAnnouncement,
   } = usePortfolio();
+
+  // In Windows Desktop mode on the home route, the OS Taskbar + Start Menu handles chrome
+  if (mode === "windows" && pathname === "/") {
+    return null;
+  }
 
   return (
     <>
@@ -222,7 +231,12 @@ export function NavbarAndModeDock() {
                 <span className="hidden font-mono-tech text-[10px] opacity-75 md:inline">
                   {meta.code}
                 </span>
-                <span className="whitespace-nowrap">{meta.shortName}</span>
+                <span className="hidden whitespace-nowrap sm:inline">
+                  {meta.shortName}
+                </span>
+                <span className="font-mono-tech text-[10px] sm:hidden">
+                  {meta.code}
+                </span>
               </button>
             );
           })}

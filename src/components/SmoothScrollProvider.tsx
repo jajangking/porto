@@ -11,7 +11,7 @@ export function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<Lenis | null>(null);
-  const { activeProject, isCommandOpen, isTerminalOpen } = usePortfolio();
+  const { mode, activeProject, isCommandOpen, isTerminalOpen } = usePortfolio();
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -41,16 +41,16 @@ export function SmoothScrollProvider({
     };
   }, []);
 
-  // Pause background smooth scroll whenever a modal / overlay is open
+  // Pause background smooth scroll whenever a modal / overlay or Windows desktop is open
   useEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
-    if (activeProject || isCommandOpen || isTerminalOpen) {
+    if (mode === "windows" || activeProject || isCommandOpen || isTerminalOpen) {
       lenis.stop();
     } else {
       lenis.start();
     }
-  }, [activeProject, isCommandOpen, isTerminalOpen]);
+  }, [activeProject, isCommandOpen, isTerminalOpen, mode]);
 
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

@@ -66,6 +66,17 @@ export const VISUAL_MODE_META: Record<
     },
     shaderLabel: "CLARITY // HIGH CONTRAST",
   },
+  windows: {
+    id: "windows",
+    code: "05",
+    name: "Windows Desktop",
+    shortName: "Win OS",
+    tagline: {
+      id: "Desktop Ikon Proyek · Start Menu · Multitasking Window",
+      en: "Desktop Project Icons · Start Menu · Fluent Windows",
+    },
+    shaderLabel: "FLUENT // DESKTOP OS",
+  },
 };
 
 interface PortfolioContextValue {
@@ -96,7 +107,13 @@ interface PortfolioContextValue {
 
 const PortfolioContext = createContext<PortfolioContextValue | null>(null);
 
-const MODES_ORDER: VisualMode[] = ["obsidian", "editorial", "hud", "clarity"];
+const MODES_ORDER: VisualMode[] = [
+  "obsidian",
+  "editorial",
+  "hud",
+  "clarity",
+  "windows",
+];
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<VisualMode>("obsidian");
@@ -312,6 +329,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         if (e.key === "2") setMode("editorial");
         if (e.key === "3") setMode("hud");
         if (e.key === "4") setMode("clarity");
+        if (e.key === "5") setMode("windows");
       }
     };
 

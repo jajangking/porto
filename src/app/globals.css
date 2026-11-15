@@ -124,6 +124,35 @@
   color-scheme: light;
 }
 
+[data-mode="windows"] {
+  --bg-primary: #0c1932;
+  --bg-secondary: #132342;
+  --bg-elevated: rgba(23, 34, 58, 0.9);
+  --bg-surface: rgba(32, 46, 76, 0.72);
+  --bg-pill: rgba(255, 255, 255, 0.09);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #60a5fa;
+  --accent-contrast: #081225;
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(56, 189, 248, 0.55);
+  --shadow-card: 0 22px 54px -20px rgba(2, 6, 23, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --radius-card: 12px;
+  --radius-pill: 8px;
+  --card-blur: 20px;
+  --grid-opacity: 0;
+  --grid-color: transparent;
+  --live-text: #4ade80;
+  --live-bg: rgba(34, 197, 94, 0.16);
+  --live-border: rgba(74, 222, 128, 0.4);
+  --warn-text: #fcd34d;
+  --warn-bg: rgba(245, 158, 11, 0.16);
+  --warn-border: rgba(251, 191, 36, 0.4);
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -240,7 +269,8 @@ body {
   color: transparent;
 }
 
-[data-mode="clarity"] .hero-accent-text {
+[data-mode="clarity"] .hero-accent-text,
+[data-mode="windows"] .hero-accent-text {
   color: var(--accent);
 }
 

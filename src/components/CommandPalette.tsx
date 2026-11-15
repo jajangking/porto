@@ -7,6 +7,7 @@ import {
   Cpu,
   ExternalLink,
   Globe,
+  Monitor,
   Search,
   Sparkles,
   SunMedium,
@@ -76,6 +77,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     { id: "editorial", icon: BookOpen },
     { id: "hud", icon: Cpu },
     { id: "clarity", icon: SunMedium },
+    { id: "windows", icon: Monitor },
   ];
 
   return (
