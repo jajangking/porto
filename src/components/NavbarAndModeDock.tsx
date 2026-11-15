@@ -10,6 +10,7 @@ import {
   BookOpen,
   Cpu,
   Globe,
+  SunMedium,
 } from "lucide-react";
 import { usePortfolio, VISUAL_MODE_META } from "@/context/PortfolioContext";
 import { PROFILE_CONFIG } from "@/data/profile";
@@ -22,6 +23,7 @@ const MODE_BUTTONS: Array<{
   { id: "obsidian", icon: Sparkles },
   { id: "editorial", icon: BookOpen },
   { id: "hud", icon: Cpu },
+  { id: "clarity", icon: SunMedium },
 ];
 
 export function NavbarAndModeDock() {
@@ -199,7 +201,7 @@ export function NavbarAndModeDock() {
                 type="button"
                 onClick={() => setMode(id)}
                 aria-pressed={active}
-                className="relative flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors"
+                className="relative flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-medium transition-colors sm:px-3 sm:text-xs"
                 style={{
                   borderRadius: mode === "hud" ? "4px" : "9999px",
                   color: active ? "var(--accent-contrast)" : "var(--text-secondary)",

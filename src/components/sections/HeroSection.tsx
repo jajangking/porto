@@ -10,6 +10,7 @@ import {
   Cpu,
   BookOpen,
   Sparkles,
+  SunMedium,
   Terminal,
 } from "lucide-react";
 import { usePortfolio, VISUAL_MODE_META } from "@/context/PortfolioContext";
@@ -35,6 +36,7 @@ export function HeroSection() {
     setMode,
     locale,
     openProject,
+    pinnedSlugs,
     setCommandOpen,
     setTerminalOpen,
     fpsEstimate,
@@ -48,7 +50,13 @@ export function HeroSection() {
     { id: "obsidian", icon: Sparkles },
     { id: "editorial", icon: BookOpen },
     { id: "hud", icon: Cpu },
+    { id: "clarity", icon: SunMedium },
   ];
+
+  const quickProjects = pinnedSlugs
+    .map((slug) => PROJECTS.find((p) => p.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .slice(0, 4);
 
   return (
     <section className="relative z-10 pt-28 pb-14 sm:pt-36 sm:pb-20">
@@ -213,8 +221,8 @@ export function HeroSection() {
                     style={{ color: "var(--accent)" }}
                   >
                     {locale === "id"
-                      ? "TRI-REALITY ENGINE // LIVE SWITCH"
-                      : "TRI-REALITY ENGINE // LIVE SWITCH"}
+                      ? "QUAD-REALITY ENGINE // LIVE SWITCH"
+                      : "QUAD-REALITY ENGINE // LIVE SWITCH"}
                   </div>
                   <div className="mt-0.5 text-sm font-semibold">
                     {locale === "id"
@@ -222,14 +230,17 @@ export function HeroSection() {
                       : "Switch Visual Architecture Instantly"}
                   </div>
                 </div>
-                <span
-                  className="rounded px-2 py-1 font-mono-tech text-[10px]"
+                <span className="rounded px-2 py-1 font-mono-tech text-[10px]"
                   style={{
                     backgroundColor: "var(--bg-pill)",
                     color: "var(--text-secondary)",
                   }}
                 >
-                  {webglActive ? `${fpsEstimate} FPS` : "2D"}
+                  {mode === "clarity"
+                    ? "CLEAN MODE"
+                    : webglActive
+                      ? `${fpsEstimate} FPS`
+                      : "2D"}
                 </span>
               </div>
 
@@ -309,15 +320,15 @@ export function HeroSection() {
                   className="mb-2.5 flex items-center justify-between font-mono-tech text-[10px] uppercase tracking-wider"
                   style={{ color: "var(--text-muted)" }}
                 >
-                  <span>
+                  <span className="font-mono-tech text-[10px] tracking-wider uppercase">
                     {locale === "id"
-                      ? "Akses Cepat Flagship"
-                      : "Quick Launch Flagships"}
+                      ? "Pilihan Terbaik (Pinned)"
+                      : "Pinned Top Picks"}
                   </span>
                   <span>0ms Modal Morph</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {PROJECTS.slice(0, 4).map((p) => (
+                  {quickProjects.map((p) => (
                     <button
                       key={p.slug}
                       type="button"

@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   ExternalLink,
   Lock,
+  Pin,
 } from "lucide-react";
 import { GitHubMark } from "@/components/icons/GitHubMark";
 import { ProjectCaseStudy } from "@/types/portfolio";
@@ -23,7 +24,8 @@ export function ProjectDetailPageView({
   prevProject: ProjectCaseStudy;
   nextProject: ProjectCaseStudy;
 }) {
-  const { locale, mode } = usePortfolio();
+  const { locale, mode, pinnedSlugs, togglePinProject } = usePortfolio();
+  const isPinned = pinnedSlugs.includes(project.slug);
 
   return (
     <div className="relative z-10 mx-auto max-w-5xl px-4 pt-28 pb-32 sm:px-6 sm:pt-36">
@@ -83,8 +85,13 @@ export function ProjectDetailPageView({
             </a>
           ) : project.isPrivateRepo ? (
             <span
-              className="inline-flex items-center gap-2 border border-amber-400/30 bg-amber-500/10 px-5 py-2.5 font-mono-tech text-xs font-semibold text-amber-300"
-              style={{ borderRadius: "var(--radius-pill)" }}
+              className="inline-flex items-center gap-2 border px-5 py-2.5 font-mono-tech text-xs font-semibold"
+              style={{
+                borderRadius: "var(--radius-pill)",
+                borderColor: "var(--warn-border)",
+                backgroundColor: "var(--warn-bg)",
+                color: "var(--warn-text)",
+              }}
             >
               <Lock className="h-3.5 w-3.5" />
               <span>
@@ -97,19 +104,44 @@ export function ProjectDetailPageView({
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 border px-5 py-2.5 text-xs font-semibold transition hover:border-[var(--accent)]"
+              className="inline-flex items-center gap-2 border px-5 py-2.5 text-xs font-semibold transition hover:opacity-85"
               style={{
                 borderRadius: "var(--radius-pill)",
-                borderColor: "var(--border-strong)",
-                backgroundColor: "var(--bg-elevated)",
+                borderColor: "var(--live-border)",
+                backgroundColor: "var(--live-bg)",
+                color: "var(--live-text)",
               }}
             >
-              <ExternalLink className="h-4 w-4 text-emerald-400" />
+              <ExternalLink className="h-4 w-4" />
               <span>
                 {locale === "id" ? "Buka Live Deployment" : "Open Live Deploy"}
               </span>
             </a>
           )}
+          <button
+            type="button"
+            onClick={() => togglePinProject(project.slug)}
+            className="inline-flex items-center gap-2 border px-4 py-2.5 font-mono-tech text-xs font-semibold transition hover:border-[var(--accent)]"
+            style={{
+              borderRadius: "var(--radius-pill)",
+              borderColor: isPinned ? "var(--accent)" : "var(--border-subtle)",
+              backgroundColor: isPinned
+                ? "var(--bg-pill)"
+                : "var(--bg-elevated)",
+              color: isPinned ? "var(--accent)" : "var(--text-secondary)",
+            }}
+          >
+            <Pin className="h-3.5 w-3.5" />
+            <span>
+              {isPinned
+                ? locale === "id"
+                  ? "Tersemat di Top Picks"
+                  : "Pinned to Top Picks"
+                : locale === "id"
+                  ? "Pin ke Top Picks"
+                  : "Pin to Top Picks"}
+            </span>
+          </button>
         </div>
 
         {project.relatedDeploys && project.relatedDeploys.length > 0 && (
@@ -126,14 +158,18 @@ export function ProjectDetailPageView({
                   href={deploy.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 border px-3 py-1 font-mono-tech text-xs transition hover:border-emerald-400/60 hover:text-emerald-300"
+                  className="inline-flex items-center gap-1.5 border px-3 py-1 font-mono-tech text-xs transition hover:border-[var(--live-border)]"
                   style={{
                     borderRadius: "var(--radius-pill)",
                     borderColor: "var(--border-subtle)",
                     backgroundColor: "var(--bg-elevated)",
+                    color: "var(--text-primary)",
                   }}
                 >
-                  <ExternalLink className="h-3 w-3 text-emerald-400" />
+                  <ExternalLink
+                    className="h-3 w-3"
+                    style={{ color: "var(--live-text)" }}
+                  />
                   <span>{deploy.name}</span>
                 </a>
               ))}

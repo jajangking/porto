@@ -1,6 +1,19 @@
 import { ProjectCaseStudy } from "@/types/portfolio";
 
 /**
+ * Curated 6 best multi-discipline projects shown by default in "Pilihan Terbaik / Pinned".
+ * Users can customize/pin/unpin any project interactively and persist in localStorage.
+ */
+export const DEFAULT_PINNED_SLUGS: string[] = [
+  "mterm",
+  "rallycross",
+  "neural-driving",
+  "robot-vision-ai",
+  "keinarra-vision",
+  "keyless-v2",
+];
+
+/**
  * Curated Flagship Showcase derived directly from github.com/jajangking repositories.
  * Add, reorder, or refine entries here to update the master portfolio showcase.
  */

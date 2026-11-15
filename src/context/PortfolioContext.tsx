@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import { Locale, ProjectCaseStudy, VisualMode } from "@/types/portfolio";
-import { PROJECTS } from "@/data/projects";
+import { DEFAULT_PINNED_SLUGS, PROJECTS } from "@/data/projects";
 
 export const VISUAL_MODE_META: Record<
   VisualMode,
@@ -55,6 +55,17 @@ export const VISUAL_MODE_META: Record<
     },
     shaderLabel: "RADAR // TOPOLOGY",
   },
+  clarity: {
+    id: "clarity",
+    code: "04",
+    name: "Pure Clarity",
+    shortName: "Clean UI",
+    tagline: {
+      id: "Putih Bersih · Kontras Tinggi · Super Mudah Dibaca",
+      en: "Crisp Daylight · High Contrast · Effortless Reading",
+    },
+    shaderLabel: "CLARITY // HIGH CONTRAST",
+  },
 };
 
 interface PortfolioContextValue {
@@ -68,6 +79,10 @@ interface PortfolioContextValue {
   openProject: (slug: string) => void;
   closeProject: () => void;
   stepProject: (direction: 1 | -1) => void;
+  pinnedSlugs: string[];
+  togglePinProject: (slug: string) => void;
+  resetPinnedProjects: () => void;
+  isPinnedCustomized: boolean;
   isCommandOpen: boolean;
   setCommandOpen: (open: boolean) => void;
   isTerminalOpen: boolean;
@@ -81,19 +96,23 @@ interface PortfolioContextValue {
 
 const PortfolioContext = createContext<PortfolioContextValue | null>(null);
 
-const MODES_ORDER: VisualMode[] = ["obsidian", "editorial", "hud"];
+const MODES_ORDER: VisualMode[] = ["obsidian", "editorial", "hud", "clarity"];
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<VisualMode>("obsidian");
   const [locale, setLocaleState] = useState<Locale>("id");
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [pinnedSlugs, setPinnedSlugs] =
+    useState<string[]>(DEFAULT_PINNED_SLUGS);
   const [isCommandOpen, setCommandOpen] = useState(false);
   const [isTerminalOpen, setTerminalOpen] = useState(false);
   const [fpsEstimate, setFpsEstimate] = useState(60);
   const [webglActive, setWebglActive] = useState(true);
-  const [modeAnnouncement, setModeAnnouncement] = useState<VisualMode | null>(null);
+  const [modeAnnouncement, setModeAnnouncement] = useState<VisualMode | null>(
+    null
+  );
 
-  // Hydrate persisted mode & locale smoothly after mount via RAF callback
+  // Hydrate persisted mode, locale, pinned slugs & project param via RAF
   useEffect(() => {
     const raf = window.requestAnimationFrame(() => {
       try {
@@ -112,6 +131,21 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         ) as Locale | null;
         if (savedLocale === "id" || savedLocale === "en") {
           setLocaleState(savedLocale);
+        }
+
+        const savedPinned = window.localStorage.getItem("porto-pinned-slugs");
+        if (savedPinned) {
+          const parsed = JSON.parse(savedPinned);
+          if (Array.isArray(parsed)) {
+            const validSlugs = parsed.filter(
+              (slug): slug is string =>
+                typeof slug === "string" &&
+                PROJECTS.some((p) => p.slug === slug)
+            );
+            if (validSlugs.length > 0) {
+              setPinnedSlugs(validSlugs);
+            }
+          }
         }
 
         const params = new URLSearchParams(window.location.search);
@@ -208,7 +242,36 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     [activeSlug, openProject]
   );
 
-  // Global keyboard shortcuts: Cmd/Ctrl+K, Backtick/Ctrl+`, Alt+1/2/3, Esc
+  const togglePinProject = useCallback((slug: string) => {
+    setPinnedSlugs((prev) => {
+      const exists = prev.includes(slug);
+      // Keep at least 1 pinned project so Best Picks view is never accidentally blank
+      if (exists && prev.length <= 1) return prev;
+      const next = exists ? prev.filter((s) => s !== slug) : [slug, ...prev];
+      try {
+        window.localStorage.setItem("porto-pinned-slugs", JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  }, []);
+
+  const resetPinnedProjects = useCallback(() => {
+    setPinnedSlugs(DEFAULT_PINNED_SLUGS);
+    try {
+      window.localStorage.removeItem("porto-pinned-slugs");
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const isPinnedCustomized = useMemo(() => {
+    if (pinnedSlugs.length !== DEFAULT_PINNED_SLUGS.length) return true;
+    return pinnedSlugs.some((slug, i) => slug !== DEFAULT_PINNED_SLUGS[i]);
+  }, [pinnedSlugs]);
+
+  // Global keyboard shortcuts: Cmd/Ctrl+K, Backtick/Ctrl+`, 1/2/3/4, Esc
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
@@ -248,6 +311,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         if (e.key === "1") setMode("obsidian");
         if (e.key === "2") setMode("editorial");
         if (e.key === "3") setMode("hud");
+        if (e.key === "4") setMode("clarity");
       }
     };
 
@@ -272,6 +336,10 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       openProject,
       closeProject,
       stepProject,
+      pinnedSlugs,
+      togglePinProject,
+      resetPinnedProjects,
+      isPinnedCustomized,
       isCommandOpen,
       setCommandOpen,
       isTerminalOpen,
@@ -293,6 +361,10 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       openProject,
       closeProject,
       stepProject,
+      pinnedSlugs,
+      togglePinProject,
+      resetPinnedProjects,
+      isPinnedCustomized,
       isCommandOpen,
       isTerminalOpen,
       fpsEstimate,
@@ -301,7 +373,11 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     ]
   );
 
-  return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
+  return (
+    <PortfolioContext.Provider value={value}>
+      {children}
+    </PortfolioContext.Provider>
+  );
 }
 
 export function usePortfolio() {

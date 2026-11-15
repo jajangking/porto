@@ -332,7 +332,12 @@ export function GitHubArchiveSection() {
                           {proj.visibility === "private" && (
                             <span
                               title="Private GitHub Repository"
-                              className="inline-flex items-center gap-1 rounded border border-amber-400/30 bg-amber-500/10 px-1.5 py-0.5 font-mono-tech text-[9px] text-amber-300"
+                              className="inline-flex items-center gap-1 rounded border px-1.5 py-0.5 font-mono-tech text-[9px] font-semibold"
+                              style={{
+                                borderColor: "var(--warn-border)",
+                                backgroundColor: "var(--warn-bg)",
+                                color: "var(--warn-text)",
+                              }}
                             >
                               <Lock className="h-2.5 w-2.5" />
                               Private
@@ -341,11 +346,20 @@ export function GitHubArchiveSection() {
                         </div>
 
                         <span
-                          className={`inline-flex shrink-0 items-center gap-1 rounded px-1.5 py-0.5 font-mono-tech text-[9px] ${
+                          className="inline-flex shrink-0 items-center gap-1 rounded border px-1.5 py-0.5 font-mono-tech text-[9px] font-semibold"
+                          style={
                             isLatestBuildAlert
-                              ? "border border-amber-400/30 bg-amber-500/10 text-amber-300"
-                              : "border border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                          }`}
+                              ? {
+                                  borderColor: "var(--warn-border)",
+                                  backgroundColor: "var(--warn-bg)",
+                                  color: "var(--warn-text)",
+                                }
+                              : {
+                                  borderColor: "var(--live-border)",
+                                  backgroundColor: "var(--live-bg)",
+                                  color: "var(--live-text)",
+                                }
+                          }
                           title={
                             isLatestBuildAlert
                               ? "Promoted production URL is live; latest commit errored on build"
@@ -399,7 +413,8 @@ export function GitHubArchiveSection() {
                         href={proj.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 font-semibold text-emerald-400 hover:underline"
+                        className="inline-flex items-center gap-1 font-semibold hover:underline"
+                        style={{ color: "var(--live-text)" }}
                       >
                         <ExternalLink className="h-3 w-3" />
                         <span>{proj.liveUrl.replace("https://", "")}</span>
@@ -553,7 +568,8 @@ export function GitHubArchiveSection() {
                           href={repo.homepage}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-emerald-400 hover:underline"
+                          className="inline-flex items-center gap-1 font-semibold hover:underline"
+                          style={{ color: "var(--live-text)" }}
                         >
                           <ExternalLink className="h-3 w-3" />
                           <span>Live</span>

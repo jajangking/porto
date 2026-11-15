@@ -34,7 +34,7 @@ export function InteractiveTerminal() {
     {
       id: 2,
       type: "output",
-      text: "Ketik 'help' untuk daftar perintah (atau 'ls', 'open mterm', 'mode hud').",
+      text: "Ketik 'help' untuk daftar perintah (atau 'ls', 'vercel', 'mode clarity', 'mode hud').",
     },
   ]);
 
@@ -89,7 +89,7 @@ export function InteractiveTerminal() {
         { type: "output", text: "  ls [category]         — List flagship projects & slugs" },
         { type: "output", text: "  vercel                — List all 16 live Vercel deployments" },
         { type: "output", text: "  open <slug>           — Launch seamless case study modal" },
-        { type: "output", text: "  mode <obsidian|editorial|hud> — Switch Reality Engine" },
+        { type: "output", text: "  mode <obsidian|editorial|hud|clarity> — Switch Reality Engine" },
         { type: "output", text: "  stack                 — Core technical runtime stack" },
         { type: "output", text: "  clear                 — Clear terminal buffer" }
       );
@@ -146,7 +146,12 @@ export function InteractiveTerminal() {
         });
       }
     } else if (base === "mode") {
-      if (arg === "obsidian" || arg === "editorial" || arg === "hud") {
+      if (
+        arg === "obsidian" ||
+        arg === "editorial" ||
+        arg === "hud" ||
+        arg === "clarity"
+      ) {
         setMode(arg);
         out.push({
           type: "accent",
@@ -155,7 +160,7 @@ export function InteractiveTerminal() {
       } else {
         out.push({
           type: "output",
-          text: `Current mode: ${mode}. Usage: mode obsidian | editorial | hud`,
+          text: `Current mode: ${mode}. Usage: mode obsidian | editorial | hud | clarity`,
         });
       }
     } else if (base === "stack") {
@@ -231,7 +236,7 @@ export function InteractiveTerminal() {
 
             {/* Quick Hint Chips */}
             <div className="flex flex-wrap gap-1.5 border-t border-white/10 bg-white/[0.02] px-4 py-2">
-              {["help", "ls", "vercel", "open mterm", "open motoringv", "mode hud", "mode obsidian"].map(
+              {["help", "ls", "vercel", "mode clarity", "mode hud", "open mterm", "open motoringv"].map(
                 (sample) => (
                   <button
                     key={sample}

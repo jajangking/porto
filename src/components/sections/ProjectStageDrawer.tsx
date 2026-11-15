@@ -10,6 +10,7 @@ import {
   ExternalLink,
   Lock,
   Maximize2,
+  Pin,
   X,
 } from "lucide-react";
 import { GitHubMark } from "@/components/icons/GitHubMark";
@@ -17,8 +18,15 @@ import { usePortfolio } from "@/context/PortfolioContext";
 import { ProjectVisualPreview } from "@/components/ProjectVisualPreview";
 
 export function ProjectStageDrawer() {
-  const { activeProject, closeProject, stepProject, locale, mode } =
-    usePortfolio();
+  const {
+    activeProject,
+    closeProject,
+    stepProject,
+    pinnedSlugs,
+    togglePinProject,
+    locale,
+    mode,
+  } = usePortfolio();
 
   return (
     <AnimatePresence>
@@ -64,6 +72,29 @@ export function ProjectStageDrawer() {
               </div>
 
               <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => togglePinProject(activeProject.slug)}
+                  className="inline-flex items-center gap-1 rounded-lg border px-2.5 py-1.5 font-mono-tech text-[11px] font-semibold transition"
+                  style={{
+                    borderColor: pinnedSlugs.includes(activeProject.slug)
+                      ? "var(--accent)"
+                      : "var(--border-subtle)",
+                    backgroundColor: pinnedSlugs.includes(activeProject.slug)
+                      ? "var(--bg-pill)"
+                      : "transparent",
+                    color: pinnedSlugs.includes(activeProject.slug)
+                      ? "var(--accent)"
+                      : "var(--text-secondary)",
+                  }}
+                >
+                  <Pin className="h-3.5 w-3.5" />
+                  <span>
+                    {pinnedSlugs.includes(activeProject.slug)
+                      ? "Pinned"
+                      : "Pin"}
+                  </span>
+                </button>
                 <button
                   type="button"
                   onClick={() => stepProject(-1)}
@@ -139,8 +170,13 @@ export function ProjectStageDrawer() {
                     </a>
                   ) : activeProject.isPrivateRepo ? (
                     <span
-                      className="inline-flex items-center gap-2 border border-amber-400/30 bg-amber-500/10 px-4 py-2 font-mono-tech text-xs font-semibold text-amber-300"
-                      style={{ borderRadius: "var(--radius-pill)" }}
+                      className="inline-flex items-center gap-2 border px-4 py-2 font-mono-tech text-xs font-semibold"
+                      style={{
+                        borderRadius: "var(--radius-pill)",
+                        borderColor: "var(--warn-border)",
+                        backgroundColor: "var(--warn-bg)",
+                        color: "var(--warn-text)",
+                      }}
                     >
                       <Lock className="h-3.5 w-3.5" />
                       <span>
@@ -158,10 +194,12 @@ export function ProjectStageDrawer() {
                       className="inline-flex items-center gap-2 border px-4 py-2 text-xs font-semibold transition hover:border-[var(--accent)]"
                       style={{
                         borderRadius: "var(--radius-pill)",
-                        borderColor: "var(--border-strong)",
+                        borderColor: "var(--live-border)",
+                        backgroundColor: "var(--live-bg)",
+                        color: "var(--live-text)",
                       }}
                     >
-                      <ExternalLink className="h-4 w-4 text-emerald-400" />
+                      <ExternalLink className="h-4 w-4" />
                       <span>
                         {locale === "id" ? "Buka Live Demo" : "Open Live Deploy"}
                       </span>
@@ -184,14 +222,18 @@ export function ProjectStageDrawer() {
                             href={deploy.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 border px-2.5 py-1 font-mono-tech text-[10px] transition hover:border-emerald-400/60 hover:text-emerald-300"
+                            className="inline-flex items-center gap-1 border px-2.5 py-1 font-mono-tech text-[10px] font-medium transition hover:border-[var(--live-border)]"
                             style={{
                               borderRadius: "var(--radius-pill)",
                               borderColor: "var(--border-subtle)",
                               backgroundColor: "var(--bg-elevated)",
+                              color: "var(--text-primary)",
                             }}
                           >
-                            <ExternalLink className="h-2.5 w-2.5 text-emerald-400" />
+                            <ExternalLink
+                              className="h-2.5 w-2.5"
+                              style={{ color: "var(--live-text)" }}
+                            />
                             <span>{deploy.name}</span>
                           </a>
                         ))}

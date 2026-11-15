@@ -9,6 +9,7 @@ import {
   Globe,
   Search,
   Sparkles,
+  SunMedium,
   Terminal,
   BookOpen,
   Triangle,
@@ -74,6 +75,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     { id: "obsidian", icon: Sparkles },
     { id: "editorial", icon: BookOpen },
     { id: "hud", icon: Cpu },
+    { id: "clarity", icon: SunMedium },
   ];
 
   return (
@@ -133,7 +135,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
             <div className="px-2 pb-1.5 font-mono-tech text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
               {locale === "id" ? "Ganti Reality Engine" : "Switch Reality Engine"}
             </div>
-            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
               {modes.map(({ id, icon: Icon }) => {
                 const active = mode === id;
                 return (
@@ -284,11 +286,16 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                           {v.name}
                         </span>
                       </div>
-                      <p className="mt-0.5 truncate font-mono-tech text-[10px] text-emerald-400">
+                      <p
+                        className="mt-0.5 truncate font-mono-tech text-[10px]"
+                        style={{ color: "var(--live-text)" }}
+                      >
                         {v.liveUrl.replace("https://", "")}
                       </p>
                     </div>
-                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[var(--text-muted)] group-hover:text-emerald-400" />
+                    <ExternalLink
+                      className="h-3.5 w-3.5 shrink-0 text-[var(--text-muted)]"
+                    />
                   </a>
                 ))}
               </div>
