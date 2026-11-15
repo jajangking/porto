@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Plus Jakarta Sans Variable", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+}
+
+:root,
+[data-mode="obsidian"] {
+  --bg-primary: #06070b;
+  --bg-secondary: #0b0e18;
+  --bg-elevated: rgba(14, 18, 32, 0.72);
+  --bg-surface: rgba(20, 25, 45, 0.56);
+  --bg-pill: rgba(255, 255, 255, 0.06);
+  --text-primary: #f4f7ff;
+  --text-secondary: #9ca8c9;
+  --text-muted: #647090;
+  --accent: #6366f1;
+  --accent-2: #22d3ee;
+  --accent-contrast: #ffffff;
+  --border-subtle: rgba(148, 163, 184, 0.14);
+  --border-strong: rgba(129, 140, 248, 0.42);
+  --shadow-card: 0 24px 60px -24px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --radius-card: 22px;
+  --radius-pill: 9999px;
+  --card-blur: 18px;
+  --grid-opacity: 0.035;
+  --grid-color: rgba(148, 163, 184, 0.45);
+  color-scheme: dark;
+}
+
+[data-mode="editorial"] {
+  --bg-primary: #f4f1ea;
+  --bg-secondary: #eae5da;
+  --bg-elevated: rgba(255, 253, 248, 0.94);
+  --bg-surface: #ebe6dc;
+  --bg-pill: rgba(17, 17, 19, 0.06);
+  --text-primary: #111113;
+  --text-secondary: #484642;
+  --text-muted: #76726a;
+  --accent: #d94e28;
+  --accent-2: #1d4ed8;
+  --accent-contrast: #fffdf8;
+  --border-subtle: rgba(17, 17, 19, 0.14);
+  --border-strong: rgba(17, 17, 19, 0.85);
+  --shadow-card: 0 18px 40px -24px rgba(17, 17, 19, 0.18);
+  --radius-card: 6px;
+  --radius-pill: 9999px;
+  --card-blur: 0px;
+  --grid-opacity: 0.045;
+  --grid-color: rgba(17, 17, 19, 0.35);
+  color-scheme: light;
+}
+
+[data-mode="hud"] {
+  --bg-primary: #030a0e;
+  --bg-secondary: #06131a;
+  --bg-elevated: rgba(6, 18, 26, 0.86);
+  --bg-surface: rgba(9, 27, 38, 0.72);
+  --bg-pill: rgba(16, 245, 168, 0.08);
+  --text-primary: #e4fbff;
+  --text-secondary: #83b8c8;
+  --text-muted: #4b7d8e;
+  --accent: #10f5a8;
+  --accent-2: #00d8ff;
+  --accent-contrast: #03110d;
+  --border-subtle: rgba(16, 245, 168, 0.18);
+  --border-strong: rgba(16, 245, 168, 0.55);
+  --shadow-card: 0 0 36px -12px rgba(16, 245, 168, 0.18), inset 0 0 0 1px rgba(16, 245, 168, 0.12);
+  --radius-card: 4px;
+  --radius-pill: 4px;
+  --card-blur: 12px;
+  --grid-opacity: 0.075;
+  --grid-color: rgba(16, 245, 168, 0.32);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s ease;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+.font-serif-editorial {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Mode-adaptive card surface */
+.reality-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--card-blur));
+  -webkit-backdrop-filter: blur(var(--card-blur));
+  transition:
+    background-color 0.4s ease,
+    border-color 0.3s ease,
+    border-radius 0.4s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.reality-card:hover {
+  border-color: var(--border-strong);
+}
+
+/* Subtle architectural / telemetry coordinate grid */
+.reality-grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: var(--grid-opacity);
+}
+
+/* HUD Mode Corner Reticles */
+[data-mode="hud"] .hud-frame {
+  position: relative;
+}
+
+[data-mode="hud"] .hud-frame::before,
+[data-mode="hud"] .hud-frame::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border-color: var(--accent);
+  opacity: 0.72;
+  transition: opacity 0.25s ease;
+}
+
+[data-mode="hud"] .hud-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+[data-mode="hud"] .hud-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+/* Obsidian atmospheric gradient text */
+[data-mode="obsidian"] .hero-accent-text {
+  background: linear-gradient(115deg, #f4f7ff 10%, #818cf8 52%, #22d3ee 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-mode="editorial"] .hero-accent-text {
+  color: var(--accent);
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+[data-mode="hud"] .hero-accent-text {
+  background: linear-gradient(95deg, #10f5a8 0%, #00d8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle scanline in HUD mode */
+[data-mode="hud"] .hud-scanline {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(16, 245, 168, 0.025) 4px
+  );
+}
+
+/* Editorial mode subtle paper grain */
+.noise-overlay {
+  background-image: radial-gradient(rgba(128, 128, 128, 0.14) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Marquee animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
