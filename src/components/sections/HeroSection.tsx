@@ -9,6 +9,7 @@ import {
   Command,
   Cpu,
   BookOpen,
+  Gamepad2,
   Monitor,
   Sparkles,
   SunMedium,
@@ -53,6 +54,7 @@ export function HeroSection() {
     { id: "hud", icon: Cpu },
     { id: "clarity", icon: SunMedium },
     { id: "windows", icon: Monitor },
+    { id: "ps5", icon: Gamepad2 },
   ];
 
   const quickProjects = pinnedSlugs

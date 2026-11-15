@@ -8,12 +8,17 @@ import { EngineeringMatrixSection } from "@/components/sections/EngineeringMatri
 import { GitHubArchiveSection } from "@/components/sections/GitHubArchiveSection";
 import { ContactFooterSection } from "@/components/sections/ContactFooterSection";
 import { WindowsDesktopView } from "@/components/WindowsDesktopView";
+import { Ps5CatalogView } from "@/components/Ps5CatalogView";
 
 export function HomeExperience() {
   const { mode } = usePortfolio();
 
   if (mode === "windows") {
     return <WindowsDesktopView />;
+  }
+
+  if (mode === "ps5") {
+    return <Ps5CatalogView />;
   }
 
   return (

@@ -1,4 +1,10 @@
-export type VisualMode = "obsidian" | "editorial" | "hud" | "clarity" | "windows";
+export type VisualMode =
+  | "obsidian"
+  | "editorial"
+  | "hud"
+  | "clarity"
+  | "windows"
+  | "ps5";
 
 export type Locale = "id" | "en";
 

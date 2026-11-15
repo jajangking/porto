@@ -77,6 +77,17 @@ export const VISUAL_MODE_META: Record<
     },
     shaderLabel: "FLUENT // DESKTOP OS",
   },
+  ps5: {
+    id: "ps5",
+    code: "06",
+    name: "PS5 Game Catalog",
+    shortName: "PS5 Hub",
+    tagline: {
+      id: "Katalog Game PS5 · DualSense D-Pad · Trofi Proyek",
+      en: "PS5 Game Hub · DualSense D-Pad · Project Trophies",
+    },
+    shaderLabel: "PS5 // CATALOG HUB",
+  },
 };
 
 interface PortfolioContextValue {
@@ -113,6 +124,7 @@ const MODES_ORDER: VisualMode[] = [
   "hud",
   "clarity",
   "windows",
+  "ps5",
 ];
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
@@ -330,6 +342,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         if (e.key === "3") setMode("hud");
         if (e.key === "4") setMode("clarity");
         if (e.key === "5") setMode("windows");
+        if (e.key === "6") setMode("ps5");
       }
     };
 

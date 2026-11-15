@@ -89,7 +89,7 @@ export function InteractiveTerminal() {
         { type: "output", text: "  ls [category]         — List flagship projects & slugs" },
         { type: "output", text: "  vercel                — List all 16 live Vercel deployments" },
         { type: "output", text: "  open <slug>           — Launch seamless case study modal" },
-        { type: "output", text: "  mode <obsidian|editorial|hud|clarity|windows> — Switch Reality" },
+        { type: "output", text: "  mode <obsidian|editorial|hud|clarity|windows|ps5> — Switch Reality" },
         { type: "output", text: "  stack                 — Core technical runtime stack" },
         { type: "output", text: "  clear                 — Clear terminal buffer" }
       );
@@ -151,7 +151,8 @@ export function InteractiveTerminal() {
         arg === "editorial" ||
         arg === "hud" ||
         arg === "clarity" ||
-        arg === "windows"
+        arg === "windows" ||
+        arg === "ps5"
       ) {
         setMode(arg);
         out.push({
@@ -161,7 +162,7 @@ export function InteractiveTerminal() {
       } else {
         out.push({
           type: "output",
-          text: `Current mode: ${mode}. Usage: mode obsidian | editorial | hud | clarity | windows`,
+          text: `Current mode: ${mode}. Usage: mode obsidian | editorial | hud | clarity | windows | ps5`,
         });
       }
     } else if (base === "stack") {
@@ -237,7 +238,7 @@ export function InteractiveTerminal() {
 
             {/* Quick Hint Chips */}
             <div className="flex flex-wrap gap-1.5 border-t border-white/10 bg-white/[0.02] px-4 py-2">
-              {["help", "ls", "vercel", "mode windows", "mode clarity", "mode hud", "open mterm"].map(
+              {["help", "ls", "vercel", "mode ps5", "mode windows", "mode clarity", "open mterm"].map(
                 (sample) => (
                   <button
                     key={sample}

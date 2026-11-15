@@ -41,11 +41,17 @@ export function SmoothScrollProvider({
     };
   }, []);
 
-  // Pause background smooth scroll whenever a modal / overlay or Windows desktop is open
+  // Pause background smooth scroll whenever a modal / overlay or OS view is open
   useEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
-    if (mode === "windows" || activeProject || isCommandOpen || isTerminalOpen) {
+    if (
+      mode === "windows" ||
+      mode === "ps5" ||
+      activeProject ||
+      isCommandOpen ||
+      isTerminalOpen
+    ) {
       lenis.stop();
     } else {
       lenis.start();

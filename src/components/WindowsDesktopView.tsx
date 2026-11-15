@@ -19,6 +19,7 @@ import {
   ExternalLink,
   Eye,
   Film,
+  Gamepad2,
   Gauge,
   KeyRound,
   Layers,
@@ -106,6 +107,7 @@ const MODE_OPTIONS: Array<{
   { id: "hud", icon: Cpu },
   { id: "clarity", icon: SunMedium },
   { id: "windows", icon: Monitor },
+  { id: "ps5", icon: Gamepad2 },
 ];
 
 function useDesktopClock() {

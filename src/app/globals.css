@@ -153,6 +153,35 @@
   color-scheme: dark;
 }
 
+[data-mode="ps5"] {
+  --bg-primary: #060911;
+  --bg-secondary: #0b1121;
+  --bg-elevated: rgba(15, 22, 40, 0.88);
+  --bg-surface: rgba(255, 255, 255, 0.06);
+  --bg-pill: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #dbeafe;
+  --text-muted: #94a3b8;
+  --accent: #ffffff;
+  --accent-2: #60a5fa;
+  --accent-contrast: #050811;
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.45);
+  --shadow-card: 0 24px 60px -24px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --radius-card: 18px;
+  --radius-pill: 9999px;
+  --card-blur: 20px;
+  --grid-opacity: 0;
+  --grid-color: transparent;
+  --live-text: #4ade80;
+  --live-bg: rgba(34, 197, 94, 0.18);
+  --live-border: rgba(74, 222, 128, 0.4);
+  --warn-text: #fcd34d;
+  --warn-bg: rgba(245, 158, 11, 0.18);
+  --warn-border: rgba(251, 191, 36, 0.4);
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -270,7 +299,8 @@ body {
 }
 
 [data-mode="clarity"] .hero-accent-text,
-[data-mode="windows"] .hero-accent-text {
+[data-mode="windows"] .hero-accent-text,
+[data-mode="ps5"] .hero-accent-text {
   color: var(--accent);
 }
 

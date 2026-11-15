@@ -10,6 +10,7 @@ import {
   Sparkles,
   BookOpen,
   Cpu,
+  Gamepad2,
   Globe,
   Monitor,
   SunMedium,
@@ -27,6 +28,7 @@ const MODE_BUTTONS: Array<{
   { id: "hud", icon: Cpu },
   { id: "clarity", icon: SunMedium },
   { id: "windows", icon: Monitor },
+  { id: "ps5", icon: Gamepad2 },
 ];
 
 export function NavbarAndModeDock() {
@@ -43,8 +45,8 @@ export function NavbarAndModeDock() {
     modeAnnouncement,
   } = usePortfolio();
 
-  // In Windows Desktop mode on the home route, the OS Taskbar + Start Menu handles chrome
-  if (mode === "windows" && pathname === "/") {
+  // In Windows Desktop or PS5 Hub modes on the home route, the dedicated OS chrome handles navigation
+  if ((mode === "windows" || mode === "ps5") && pathname === "/") {
     return null;
   }
 

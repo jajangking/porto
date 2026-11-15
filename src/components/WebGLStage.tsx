@@ -56,6 +56,14 @@ const MODE_CONFIG: Record<
     secondaryColor: "#1d4ed8",
     particleOpacity: 0.0,
   },
+  ps5: {
+    orbMix: 0.0,
+    ribbonMix: 0.0,
+    hudMix: 0.0,
+    primaryColor: "#60a5fa",
+    secondaryColor: "#ffffff",
+    particleOpacity: 0.0,
+  },
 };
 
 const ORB_VERTEX_SHADER = /* glsl */ `
@@ -450,7 +458,8 @@ export function WebGLStage() {
       <div
         className="absolute inset-0 transition-opacity duration-500"
         style={{
-          opacity: mode === "clarity" || mode === "windows" ? 0 : 1,
+          opacity:
+            mode === "clarity" || mode === "windows" || mode === "ps5" ? 0 : 1,
           background:
             mode === "obsidian"
               ? "radial-gradient(60% 50% at 75% 20%, rgba(99,102,241,0.16), transparent 70%), radial-gradient(45% 45% at 20% 75%, rgba(34,211,238,0.1), transparent 70%)"
@@ -463,13 +472,21 @@ export function WebGLStage() {
       <div className="reality-grid-bg absolute inset-0" />
       <div
         className="hud-scanline noise-overlay absolute inset-0 transition-opacity duration-500"
-        style={{ opacity: mode === "clarity" || mode === "windows" ? 0 : 0.45 }}
+        style={{
+          opacity:
+            mode === "clarity" || mode === "windows" || mode === "ps5"
+              ? 0
+              : 0.45,
+        }}
       />
       {/* Persistent Three.js WebGL Stage */}
       <div
         ref={containerRef}
         className="absolute inset-0 transition-opacity duration-500"
-        style={{ opacity: mode === "clarity" || mode === "windows" ? 0 : 1 }}
+        style={{
+          opacity:
+            mode === "clarity" || mode === "windows" || mode === "ps5" ? 0 : 1,
+        }}
       />
     </div>
   );

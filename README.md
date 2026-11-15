@@ -1,12 +1,13 @@
 # Master Portfolio — @jajangking
 
-Portfolio showcase interaktif dengan **5-Reality Visual Engine** (ganti mode tampilan secara real-time tanpa reload):
+Portfolio showcase interaktif dengan **6-Reality Visual Engine** (ganti mode tampilan secara real-time tanpa reload):
 
 1. **01 · Obsidian 3D** — Dark glassmorphism, custom GLSL neural shader orb, luminous indigo/cyan aura.
 2. **02 · Kinetic Editorial** — Tipografi editorial studio (Instrument Serif + Space Grotesk), garis Swiss presisi, warm gallery paper.
 3. **03 · Spatial HUD** — Engineering cockpit, coordinate topology grid, radar wireframe, telemetry live FPS.
 4. **04 · Pure Clarity (Clean UI)** — Mode putih bersih kontras tinggi tanpa distraksi shader untuk keterbacaan informasi yang maksimal.
 5. **05 · Windows Desktop (`Win OS`)** — Antarmuka desktop responsif bergaya Windows 11 lengkap dengan ikon shortcut proyek, Start Menu, multitasking Window (minimize/maximize/close), This PC, dan Vercel Explorer.
+6. **06 · PS5 Game Catalog (`PS5 Hub`)** — Katalog interaktif bergaya PlayStation 5 dengan deretan game tiles horizontal, latar ambient dinamis mengikuti proyek terpilih, tombol navigasi D-pad `← / →`, kartu Trophy metrik, tab Vercel Media Library, dan Trofi Profil.
 
 ## Stack Teknologi
 
@@ -18,7 +19,7 @@ Portfolio showcase interaktif dengan **5-Reality Visual Engine** (ganti mode tam
 
 ## Fitur Utama
 
-- **5-Reality Mode Switcher**: Floating dock di bawah & shortcut keyboard `1`, `2`, `3`, `4`, `5`.
+- **6-Reality Mode Switcher**: Floating dock di bawah & shortcut keyboard `1`, `2`, `3`, `4`, `5`, `6`.
 - **Pilihan Terbaik (Pinned Top Picks)**: Secara default menampilkan 6 karya terkuat lintas disiplin agar ringkas dan fokus, plus tombol **Pin/Unpin** interaktif di tiap kartu untuk menyusun daftar prioritas sendiri.
 - **Zero-Reload Case Study Stage**: Klik proyek mana saja untuk membuka panel studi kasus lengkap dengan diagram arsitektur & simulasi domain interaktif (plus deep-link `/projects/[slug]`).
 - **Vercel Cloud & GitHub Vault**: Switcher langsung antara **16 Live Vercel Apps** (`inventory`, `motoringv`, `keinarra`, `kei`, `asisten`, `toolkit`, `fixit`, dll.) dan repositori GitHub.

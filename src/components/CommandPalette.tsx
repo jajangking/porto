@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   Cpu,
   ExternalLink,
+  Gamepad2,
   Globe,
   Monitor,
   Search,
@@ -78,6 +79,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     { id: "hud", icon: Cpu },
     { id: "clarity", icon: SunMedium },
     { id: "windows", icon: Monitor },
+    { id: "ps5", icon: Gamepad2 },
   ];
 
   return (
