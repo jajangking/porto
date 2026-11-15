@@ -28,7 +28,7 @@ const MARQUEE_STACK = [
   "llama.cpp ARM64 VLM",
   "TensorFlow.js + Groq",
   "ESP32-S3-CAM & BLE",
-  "Framer Motion + Lenis",
+  "Framer Motion + Three.js",
   "TypeScript Strict",
 ];
 

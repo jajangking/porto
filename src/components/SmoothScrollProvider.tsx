@@ -1,62 +1,35 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import Lenis from "lenis";
+import React, { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { usePortfolio } from "@/context/PortfolioContext";
 
+/**
+ * Provides reduced-motion preferences and ensures clean top-scroll alignment
+ * when transitioning between scrolling showcase modes and OS dashboard modes,
+ * while keeping 100% native browser wheel & touch scrolling active everywhere.
+ */
 export function SmoothScrollProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const lenisRef = useRef<Lenis | null>(null);
-  const { mode, activeProject, isCommandOpen, isTerminalOpen } = usePortfolio();
+  const { mode } = usePortfolio();
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+    // Ensure any stale Lenis classes/overflow styles are never left on <html>
+    document.documentElement.classList.remove(
+      "lenis",
+      "lenis-smooth",
+      "lenis-stopped",
+      "lenis-autoToggle"
+    );
+    document.documentElement.style.removeProperty("overflow");
 
-    const lenis = new Lenis({
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.4,
-    });
-    lenisRef.current = lenis;
-
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = window.requestAnimationFrame(raf);
-    };
-    rafId = window.requestAnimationFrame(raf);
-
-    return () => {
-      window.cancelAnimationFrame(rafId);
-      lenis.destroy();
-      lenisRef.current = null;
-    };
-  }, []);
-
-  // Pause background smooth scroll whenever a modal / overlay or OS view is open
-  useEffect(() => {
-    const lenis = lenisRef.current;
-    if (!lenis) return;
-    if (
-      mode === "windows" ||
-      mode === "ps5" ||
-      activeProject ||
-      isCommandOpen ||
-      isTerminalOpen
-    ) {
-      lenis.stop();
-    } else {
-      lenis.start();
+    if (mode === "windows" || mode === "ps5") {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     }
-  }, [activeProject, isCommandOpen, isTerminalOpen, mode]);
+  }, [mode]);
 
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

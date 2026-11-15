@@ -65,7 +65,9 @@ export function PrecisionCursor() {
     };
   }, [cursorX, cursorY, enabled]);
 
-  if (!enabled) return null;
+  if (!enabled || mode === "clarity" || mode === "windows" || mode === "ps5") {
+    return null;
+  }
 
   return (
     <motion.div

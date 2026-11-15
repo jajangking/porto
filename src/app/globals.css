@@ -187,7 +187,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }

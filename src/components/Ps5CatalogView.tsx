@@ -198,7 +198,7 @@ export function Ps5CatalogView() {
 
   return (
     <div
-      className="relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden bg-[#060911] text-white"
+      className="relative flex min-h-[100dvh] w-full flex-col overflow-x-clip bg-[#060911] text-white"
       onClick={() => {
         if (themeMenuOpen) setThemeMenuOpen(false);
       }}
